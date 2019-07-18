@@ -1,4 +1,4 @@
-# Question Answering on Multiparty Dialogues
+# Question Answering on Multiparty Dialogue
 
 Question Answering challenges the machine's ability of answering to queries in different forms.
 This is a part of the [Character Mining](../../../character-mining) project led by the [Emory NLP](http://nlp.mathcs.emory.edu) research group.
@@ -286,7 +286,7 @@ Every scene has utterances concatenated together with 8-12 questions.
 
 ## Citation
 
-<!-- * [Challenging Reading Comprehension on Daily Conversation: Passage Completion on Multiparty Dialog](http://aclweb.org/anthology/N18-1185). Kaixin Ma, Tomasz Jurczyk, and Jinho D. Choi. In Proceedings of the 16th Annual Conference of the North American Chapter of the Association for Computational Linguistics, NAACL'18, 2018 ([poster](https://www.slideshare.net/jchoi7s/challenging-reading-comprehension-on-daily-conversation-passage-completion-on-multiparty-dialog), [source](https://github.com/Mayer123/Multiparty-Dialog-RC)).  -->
+* [FriendsQA: Open-Domain Question Answering on TV Show Transcripts](). Zhengzhe Yang and Jinho D. Choi. In Proceedings of the Annual Conference of the ACL Special Interest Group on Discourse and Dialogue, SIGDIAL'19, 2019 ([poster]()).
 
 
 ## Contact

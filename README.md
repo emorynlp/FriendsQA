@@ -286,8 +286,7 @@ Every scene has utterances concatenated together with 8-12 questions.
 
 ## Citation
 
-* [FriendsQA: Open-Domain Question Answering on TV Show Transcripts](). Zhengzhe Yang and Jinho D. Choi. In Proceedings of the Annual Conference of the ACL Special Interest Group on Discourse and Dialogue, SIGDIAL'19, 2019 ([poster]()).
-
+* [FriendsQA: Open-Domain Question Answering on TV Show Transcripts](https://www.aclweb.org/anthology/W19-5923). Zhengzhe Yang and Jinho D. Choi. In Proceedings of the Annual Conference of the ACL Special Interest Group on Discourse and Dialogue, SIGDIAL'19, 2019 ([slides](https://www.slideshare.net/jchoi7s/friendsqa-opendomain-question-answering-on-tv-show-transcripts-154329602)).
 
 ## Contact
 

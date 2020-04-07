@@ -51,13 +51,14 @@ For the generation of the FriendsQA dataset, 1,222 scenes from the first four se
 
 ## Statistics
 
-Queries are randomly distributed to the Training (TRN), Development (DEV) and Test (TST) sets.
-
 <!-- * U / Q: the average number of utterances per query.
+
 * {E} / Q: the average number of entity types per query.
 * [E] / Q: the average number of entities per query.
 * {E} / U: the average number of entity types per utterance.
 * [E] / U: the average number of entities per utterance. -->
+
+For old data split, queries are randomly distributed to the Training (TRN), Development (DEV) and Test (TST) sets.
 
 | Dataset | Dialogues | Questions | Answers |
 |:-------:|----------:|----------:|--------:|
@@ -66,10 +67,20 @@ Queries are randomly distributed to the Training (TRN), Development (DEV) and Te
 | TST     | 123       | 1,065     | 2,131   |
 | Total   | 1,222     | 10,610    | 21,262  |
 
+The new datasplit is based on chronological order of the episodes.
+
+| Dataset | Dialogues | Questions | Answers | Eposides |
+| :-----: | --------: | --------: | ------: | -------: |
+|   TRN   |       973 |     9,791 |  16,352 |   1 - 20 |
+|   DEV   |       113 |     1,189 |   2,065 |  21 - 22 |
+|   TST   |       136 |     1,172 |   1,920 |   23 - * |
+
+
+## 
 
 ## Annotation
 
-Every scene has utterances concatenated together with 8-12 questions. 
+Below is the whole context data format: every scene has utterances concatenated together with 8-12 questions. 
 
 ```json
 {
@@ -284,8 +295,455 @@ Every scene has utterances concatenated together with 8-12 questions.
     }
 ```
 
+Below is the split context data format: 
+
+```json
+"title": "s01_e23_c06",
+            "paragraphs": [
+                {
+                    "utterances:": [
+                        {
+                            "uid": 0,
+                            "speakers": [
+                                "Ross Geller"
+                            ],
+                            "utterance": "Breathe ."
+                        },
+                        {
+                            "uid": 1,
+                            "speakers": [
+                                "Susan Bunch"
+                            ],
+                            "utterance": "Breathe ."
+                        },
+                        {
+                            "uid": 2,
+                            "speakers": [
+                                "Ross Geller"
+                            ],
+                            "utterance": "Breathe ."
+                        },
+                        {
+                            "uid": 3,
+                            "speakers": [
+                                "Susan Bunch"
+                            ],
+                            "utterance": "Breathe ."
+                        },
+                        {
+                            "uid": 4,
+                            "speakers": [
+                                "Ross Geller"
+                            ],
+                            "utterance": "Breathe ."
+                        },
+                        {
+                            "uid": 5,
+                            "speakers": [
+                                "Susan Bunch"
+                            ],
+                            "utterance": "Breathe ."
+                        },
+                        {
+                            "uid": 6,
+                            "speakers": [
+                                "Carol Willick"
+                            ],
+                            "utterance": "You 're gon na kill me !"
+                        },
+                        {
+                            "uid": 7,
+                            "speakers": [
+                                "Ross Geller"
+                            ],
+                            "utterance": "15 more seconds , 14 , 13 , 12 ..."
+                        },
+                        {
+                            "uid": 8,
+                            "speakers": [
+                                "Carol Willick"
+                            ],
+                            "utterance": "Count faster ."
+                        },
+                        {
+                            "uid": 9,
+                            "speakers": [
+                                "Susan Bunch"
+                            ],
+                            "utterance": "It 's gon na be ok , just remember , we 're doing this for Jordie . Just keep focusing on Jordie ."
+                        },
+                        {
+                            "uid": 10,
+                            "speakers": [
+                                "Ross Geller"
+                            ],
+                            "utterance": "Who the hell is Jordie ?"
+                        },
+                        {
+                            "uid": 11,
+                            "speakers": [
+                                "Susan Bunch"
+                            ],
+                            "utterance": "Your son ."
+                        },
+                        {
+                            "uid": 12,
+                            "speakers": [
+                                "Ross Geller"
+                            ],
+                            "utterance": "No - no - no . I do n't have a son named Jordie . We all agreed , my son 's name is Jamie ."
+                        },
+                        {
+                            "uid": 13,
+                            "speakers": [
+                                "Carol Willick"
+                            ],
+                            "utterance": "Well , Jamie was the name of Susan 's first girlfriend , so we went back to Jordie ."
+                        },
+                        {
+                            "uid": 14,
+                            "speakers": [
+                                "Ross Geller"
+                            ],
+                            "utterance": "What ? Whoa , whoa whoa whoa , what do you mean , back to Jordie ? We never landed on Jordie . We just passed by it during the whole Jessy , Cody , Dylan fiasco ."
+                        },
+                        {
+                            "uid": 15,
+                            "speakers": [
+                                "Carol Willick"
+                            ],
+                            "utterance": "Ow , ow , ow , ow , leg cramp , leg cramp , leg cramp ."
+                        },
+                        {
+                            "uid": 16,
+                            "speakers": [
+                                "Ross Geller"
+                            ],
+                            "utterance": "I got it ."
+                        },
+                        {
+                            "uid": 17,
+                            "speakers": [
+                                "Susan Bunch"
+                            ],
+                            "utterance": "I got it ."
+                        },
+                        {
+                            "uid": 18,
+                            "speakers": [
+                                "Ross Geller"
+                            ],
+                            "utterance": "I got it ! Hey , you get to sleep with her , I get the cramps ."
+                        },
+                        {
+                            "uid": 19,
+                            "speakers": [
+                                "Susan Bunch"
+                            ],
+                            "utterance": "No , you do n't ."
+                        },
+                        {
+                            "uid": 20,
+                            "speakers": [
+                                "Carol Willick"
+                            ],
+                            "utterance": "All right , that 's it . I want both of you out ."
+                        },
+                        {
+                            "uid": 21,
+                            "speakers": [
+                                "Ross Geller"
+                            ],
+                            "utterance": "Why ?"
+                        },
+                        {
+                            "uid": 22,
+                            "speakers": [
+                                "Susan Bunch"
+                            ],
+                            "utterance": "He started it !"
+                        },
+                        {
+                            "uid": 23,
+                            "speakers": [
+                                "Ross Geller"
+                            ],
+                            "utterance": "No , you started it ."
+                        },
+                        {
+                            "uid": 24,
+                            "speakers": [
+                                "Susan Bunch"
+                            ],
+                            "utterance": "You did !"
+                        },
+                        {
+                            "uid": 25,
+                            "speakers": [
+                                "Carol Willick"
+                            ],
+                            "utterance": "I do n't care . I am trying to get a person out of my body here , and you 're not making it any easier ."
+                        },
+                        {
+                            "uid": 26,
+                            "speakers": [
+                                "Ross Geller"
+                            ],
+                            "utterance": "But ..."
+                        },
+                        {
+                            "uid": 27,
+                            "speakers": [
+                                "Carol Willick"
+                            ],
+                            "utterance": "Now go !"
+                        },
+                        {
+                            "uid": 28,
+                            "speakers": [
+                                "Ross Geller"
+                            ],
+                            "utterance": "Thanks a lot ."
+                        },
+                        {
+                            "uid": 29,
+                            "speakers": [
+                                "Susan Bunch"
+                            ],
+                            "utterance": "See what you did ."
+                        },
+                        {
+                            "uid": 30,
+                            "speakers": [
+                                "Ross Geller"
+                            ],
+                            "utterance": "Yeah , listen ..."
+                        },
+                        {
+                            "uid": 31,
+                            "speakers": [
+                                "Carol Willick"
+                            ],
+                            "utterance": "Out !"
+                        },
+                        {
+                            "uid": 32,
+                            "speakers": [
+                                "#NOTE#"
+                            ],
+                            "utterance": "( Ross and Susan both angrily leave the hopsital room . )"
+                        }
+                    ],
+                    "qas": [
+                        {
+                            "id": "s01_e23_c06_What",
+                            "question": "What does Ross want to name his son ?",
+                            "answers": [
+                                {
+                                    "answer_text": "Jamie",
+                                    "utterance_id": 12,
+                                    "inner_start": 24,
+                                    "inner_end": 24,
+                                    "is_speaker": false
+                                },
+                                {
+                                    "answer_text": "Jordie .",
+                                    "utterance_id": 9,
+                                    "inner_start": 21,
+                                    "inner_end": 22,
+                                    "is_speaker": false
+                                }
+                            ]
+                        },
+                        {
+                            "id": "s01_e23_c06_Who",
+                            "question": "Who told Ross to count faster ?",
+                            "answers": [
+                                {
+                                    "answer_text": "Carol Willick",
+                                    "utterance_id": 6,
+                                    "inner_start": -1,
+                                    "inner_end": -1,
+                                    "is_speaker": true
+                                }
+                            ]
+                        },
+                        {
+                            "id": "s01_e23_c06_When",
+                            "question": "When was the name Jordie passed by ?",
+                            "answers": [
+                                {
+                                    "answer_text": "during the whole Jessy , Cody , Dylan fiasco",
+                                    "utterance_id": 14,
+                                    "inner_start": 28,
+                                    "inner_end": 36,
+                                    "is_speaker": false
+                                },
+                                {
+                                    "answer_text": "No - no - no . I do n't have a son named Jordie",
+                                    "utterance_id": 12,
+                                    "inner_start": 0,
+                                    "inner_end": 13,
+                                    "is_speaker": false
+                                }
+                            ]
+                        },
+                        {
+                            "id": "s01_e23_c06_Where",
+                            "question": "Where are Susan Ross and Carol ?",
+                            "answers": [
+                                {
+                                    "answer_text": "hopsital room",
+                                    "utterance_id": 32,
+                                    "inner_start": 8,
+                                    "inner_end": 9,
+                                    "is_speaker": false
+                                },
+                                {
+                                    "answer_text": "the hopsital room",
+                                    "utterance_id": 32,
+                                    "inner_start": 7,
+                                    "inner_end": 9,
+                                    "is_speaker": false
+                                }
+                            ]
+                        },
+                        {
+                            "id": "s01_e23_c06_Why",
+                            "question": "Why did Carol not want to name the baby Jamie ?",
+                            "answers": [
+                                {
+                                    "answer_text": "Jamie was the name of Susan 's first girlfriend",
+                                    "utterance_id": 13,
+                                    "inner_start": 2,
+                                    "inner_end": 10,
+                                    "is_speaker": false
+                                }
+                            ]
+                        },
+                        {
+                            "id": "s01_e23_c06_How",
+                            "question": "How did Ross and Susan leave the hospital room ?",
+                            "answers": [
+                                {
+                                    "answer_text": "angrily",
+                                    "utterance_id": 32,
+                                    "inner_start": 5,
+                                    "inner_end": 5,
+                                    "is_speaker": false
+                                }
+                            ]
+                        },
+                        {
+                            "id": "s01_e23_c06_What_Paraphrased",
+                            "question": "What is the name Ross wishes for his son ?",
+                            "answers": [
+                                {
+                                    "answer_text": "Jamie",
+                                    "utterance_id": 12,
+                                    "inner_start": 24,
+                                    "inner_end": 24,
+                                    "is_speaker": false
+                                },
+                                {
+                                    "answer_text": "Jordie .",
+                                    "utterance_id": 9,
+                                    "inner_start": 21,
+                                    "inner_end": 22,
+                                    "is_speaker": false
+                                }
+                            ]
+                        },
+                        {
+                            "id": "s01_e23_c06_Who_Paraphrased",
+                            "question": "By whom was Ross told to count faster ?",
+                            "answers": [
+                                {
+                                    "answer_text": "Carol Willick",
+                                    "utterance_id": 6,
+                                    "inner_start": -1,
+                                    "inner_end": -1,
+                                    "is_speaker": true
+                                }
+                            ]
+                        },
+                        {
+                            "id": "s01_e23_c06_When_Paraphrased",
+                            "question": "At what point was the name Jordie rejected ?",
+                            "answers": [
+                                {
+                                    "answer_text": "during the whole Jessy , Cody , Dylan fiasco",
+                                    "utterance_id": 14,
+                                    "inner_start": 28,
+                                    "inner_end": 36,
+                                    "is_speaker": false
+                                },
+                                {
+                                    "answer_text": "No - no - no . I do n't have a son named Jordie",
+                                    "utterance_id": 12,
+                                    "inner_start": 0,
+                                    "inner_end": 13,
+                                    "is_speaker": false
+                                }
+                            ]
+                        },
+                        {
+                            "id": "s01_e23_c06_Where_Paraphrased",
+                            "question": "What is Susan and Carols ' location ?",
+                            "answers": [
+                                {
+                                    "answer_text": "hopsital room",
+                                    "utterance_id": 32,
+                                    "inner_start": 8,
+                                    "inner_end": 9,
+                                    "is_speaker": false
+                                },
+                                {
+                                    "answer_text": "the hopsital room",
+                                    "utterance_id": 32,
+                                    "inner_start": 7,
+                                    "inner_end": 9,
+                                    "is_speaker": false
+                                }
+                            ]
+                        },
+                        {
+                            "id": "s01_e23_c06_Why_Paraphrased",
+                            "question": "Carol did not want to name the baby Jamie for what reason ?",
+                            "answers": [
+                                {
+                                    "answer_text": "Jamie was the name of Susan 's first girlfriend",
+                                    "utterance_id": 13,
+                                    "inner_start": 2,
+                                    "inner_end": 10,
+                                    "is_speaker": false
+                                }
+                            ]
+                        },
+                        {
+                            "id": "s01_e23_c06_How_Paraphrased",
+                            "question": "In what fashion did Ross and Susan leave the hospital room ?",
+                            "answers": [
+                                {
+                                    "answer_text": "angrily",
+                                    "utterance_id": 32,
+                                    "inner_start": 5,
+                                    "inner_end": 5,
+                                    "is_speaker": false
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+```
+
+
+
 ## Citation
 
+* Transformers to Learn Hierarchical Contexts in Multiparty Dialogue for Span-based Question Answering. Changmao Li and Jinho D. Choi. In Proceedings of the Conference of the Association for Computational Linguistics, ACL'20, 2020.
 * [FriendsQA: Open-Domain Question Answering on TV Show Transcripts](https://www.aclweb.org/anthology/W19-5923). Zhengzhe Yang and Jinho D. Choi. In Proceedings of the Annual Conference of the ACL Special Interest Group on Discourse and Dialogue, SIGDIAL'19, 2019 ([slides](https://www.slideshare.net/jchoi7s/friendsqa-opendomain-question-answering-on-tv-show-transcripts-154329602)).
 
 ## Contact

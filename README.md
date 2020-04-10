@@ -54,29 +54,27 @@ The format of the data separates the context into several utterances and separat
 
 ```json
 "utterances:": [
-  											...,
                         {
-                            "uid": 4,
+                            "uid": 0,
                             "speakers": [
                                 "Ross Geller"
                             ],
                             "utterance": "Breathe ."
                         },
                         {
-                            "uid": 5,
+                            "uid": 1,
                             "speakers": [
                                 "Susan Bunch"
                             ],
                             "utterance": "Breathe ."
                         },
                         {
-                            "uid": 6,
+                            "uid": 2,
                             "speakers": [
                                 "Carol Willick"
                             ],
                             "utterance": "You 're gon na kill me !"
                         }
-											...,
   ]
 ```
 

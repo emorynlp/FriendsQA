@@ -20,24 +20,12 @@ The following shows a multiparty dialogue between Joey and Chandler with 6 quest
 | `U12` | Joey: Yeah. Why are you getting so upset? |
 | `U13` | Chandler: Well, I’m upset for you. I mean, dating an endless line of beautiful women must be very unfulfilling for you. |
 
-<p align="left">
-Q1: <code>What</code> is Joey going to do with Casey tonight?
-</p>
-<p align="left">
-Q2: <code>Who</code> is Joey getting a phone number from?
-</p>
-<p align="left">
-Q3: <code>When</code> will Joey have dinner with Kathy?
-<p align="left">
-Q4: <code>Where</code> are Joey and Chandler?
-</p>
-<p align="left">
-Q5: <code>Why</code> is Chandler upset?
-</p>
-<p align="left">
-Q6: <code>How</code> are things between Joey and Kathy?
-</p>
-
+* Q1: <code>What</code> is Joey going to do with Casey tonight?
+* Q2: <code>Who</code> is Joey getting a phone number from?
+* Q3: <code>When</code> will Joey have dinner with Kathy?
+* Q4: <code>Where</code> are Joey and Chandler?
+* Q5: <code>Why</code> is Chandler upset?
+* Q6: <code>How</code> are things between Joey and Kathy?
 
 Your task is to answering these open-domain questions using contiguous spans from the dialogues. 
 This task is challenging because questions could be in any form and might not contain the exact words from the document. 
@@ -46,28 +34,11 @@ This task is challenging because questions could be in any form and might not co
 
 For the generation of the FriendsQA dataset, 1,222 scenes from the first four seasons of the Character Mining dataset are selected. Scenes with fewer than five utterances are discarded (83 of them), and each scene is considered an independent dialogue. FriendQA can be viewed as answer span selection, where questions are asked for some contexts in a dialogue and the model is expected to find certain spans in the dialogue containing answer contents. The dialogue aspects of this dataset, however, make it more challenging than other datasets comprising passages in formal languages. Details could be found in the paper. 
 
-* Latest release: [v1.0](https://github.com/emorynlp/reading-comprehension/archive/reading-comprehension-1.0.tar.gz).
-* [Release notes](https://github.com/emorynlp/reading-comprehension/releases).
+* Latest release: [v2.0](https://github.com/emorynlp/reading-comprehension/archive/reading-comprehension-2.0.tar.gz)
 
 ## Statistics
 
-<!-- * U / Q: the average number of utterances per query.
-
-* {E} / Q: the average number of entity types per query.
-* [E] / Q: the average number of entities per query.
-* {E} / U: the average number of entity types per utterance.
-* [E] / U: the average number of entities per utterance. -->
-
-For old data split, queries are randomly distributed to the Training (TRN), Development (DEV) and Test (TST) sets.
-
-| Dataset | Dialogues | Questions | Answers |
-|:-------:|----------:|----------:|--------:|
-| TRN     | 977       | 8,535     | 17,074  |
-| DEV     | 122       | 1,010     | 2,057   |
-| TST     | 123       | 1,065     | 2,131   |
-| Total   | 1,222     | 10,610    | 21,262  |
-
-The new datasplit is based on chronological order of the episodes.
+The data split is based on chronological order of the episodes that is consistent across other Character Mining projects:
 
 | Dataset | Dialogues | Questions | Answers | Eposides |
 | :-----: | --------: | --------: | ------: | -------: |
@@ -80,7 +51,7 @@ The new datasplit is based on chronological order of the episodes.
 
 ## Annotation
 
-Below is the whole context data format: every scene has utterances concatenated together with 8-12 questions. 
+<!-- Below is the whole context data format: every scene has utterances concatenated together with 8-12 questions. 
 
 ```json
 {
@@ -737,14 +708,14 @@ Below is the split context data format:
                 }
             ]
         }
-```
+``` -->
 
 
 
 ## Citation
 
-* Transformers to Learn Hierarchical Contexts in Multiparty Dialogue for Span-based Question Answering. Changmao Li and Jinho D. Choi. In Proceedings of the Conference of the Association for Computational Linguistics, ACL'20, 2020.
-* [FriendsQA: Open-Domain Question Answering on TV Show Transcripts](https://www.aclweb.org/anthology/W19-5923). Zhengzhe Yang and Jinho D. Choi. In Proceedings of the Annual Conference of the ACL Special Interest Group on Discourse and Dialogue, SIGDIAL'19, 2019 ([slides](https://www.slideshare.net/jchoi7s/friendsqa-opendomain-question-answering-on-tv-show-transcripts-154329602)).
+* [Transformers to Learn Hierarchical Contexts in Multiparty Dialogue for Span-based Question Answering](). Changmao Li and Jinho D. Choi. In Proceedings of the Conference of the Association for Computational Linguistics, ACL'20, 2020.
+* [FriendsQA: Open-Domain Question Answering on TV Show Transcripts](https://www.aclweb.org/anthology/W19-5923). Zhengzhe Yang and Jinho D. Choi. In Proceedings of the Annual Conference of the ACL Special Interest Group on Discourse and Dialogue, SIGDIAL'19, 2019.
 
 ## Contact
 

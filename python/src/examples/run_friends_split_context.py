@@ -193,7 +193,7 @@ def train(args, train_datasets, model, tokenizer, train_len):
                     continue
                 model.train()
                 batch = tuple(t.to(args.device) for t in batch)
-                inputs = {"types_lines_ids": batch[0], "attention_masks": batch[1],
+                inputs = {"utterances_input_ids": batch[0], "utterances_attention_mask": batch[1],
                           "question_input_ids": batch[2], "question_attention_mask": batch[3],
                           "utterance_labels": batch[4], "left_labels": batch[5], "right_labels": batch[6]}
                 outputs = model(**inputs)
@@ -321,7 +321,7 @@ def evaluate(args, model, tokenizer, prefix=""):
             with torch.no_grad():
                 result = {}
                 n_result = {}
-                inputs = {"types_lines_ids": batch[0], "attention_masks": batch[1],
+                inputs = {"utterances_input_ids": batch[0], "utterances_attention_mask": batch[1],
                           "question_input_ids": batch[2], "question_attention_mask": batch[3]}
                 outputs = model(**inputs)
                 utterance_logits, left_logits, right_logits = outputs[:3]
@@ -372,7 +372,7 @@ def load_and_cache_examples(args, tokenizer, evaluate=False):
             processor.get_dev_examples(args.data_dir) if evaluate else processor.get_train_examples(args.data_dir)
         )
         features = convert_examples_to_features(
-            examples[0],
+            examples,
             tokenizer,
             args.max_line_length,
             args.max_line_number,
@@ -387,7 +387,6 @@ def load_and_cache_examples(args, tokenizer, evaluate=False):
     batch_dict = {}
     for f in features:
         n_lines = len(f.lines_input_ids)
-        assert len(f.type_input_ids) == n_lines
         if n_lines not in batch_dict:
             batch_dict[n_lines] = [f]
         else:
@@ -403,8 +402,8 @@ def load_and_cache_examples(args, tokenizer, evaluate=False):
         batch_question_input_ids = torch.tensor([f.question_input_ids for f in batch_features], dtype=torch.long)
         batch_question_attention_masks = torch.tensor([f.question_attention_masks for f in batch_features], dtype=torch.long)
         batch_utterance_labels = torch.tensor([f.utterance_label for f in batch_features], dtype=torch.long)
-        batch_left_labels = torch.tensor([f.left_labels for f in batch_features], dtype=torch.long)
-        batch_right_labels = torch.tensor([f.right_labels for f in batch_features], dtype=torch.long)
+        batch_left_labels = torch.tensor([f.left_label for f in batch_features], dtype=torch.long)
+        batch_right_labels = torch.tensor([f.right_label for f in batch_features], dtype=torch.long)
         if evaluate:
             dataset = TensorDataset(batch_lines_input_ids, batch_attention_masks, batch_question_input_ids,
                                     batch_question_attention_masks)
@@ -660,8 +659,9 @@ def main():
         args.model_name_or_path,
         from_tf=bool(".ckpt" in args.model_name_or_path),
         config=config,
-        force_download=True,
-        resume_download=True
+        utterance_config=BertConfig(max_position_embeddings=31, num_hidden_layers=2),
+        max_utterances=107,
+        max_utterance_length=128
     )
 
     if args.local_rank == 0:

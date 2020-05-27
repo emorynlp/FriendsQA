@@ -24,17 +24,17 @@ class FriendsQAProcessor(DataProcessor):
         raise NotImplementedError()
 
     def get_train_examples(self, data_dir):
-        with open(os.path.join(data_dir, "friends_train.json"), "r", encoding="utf-8") as reader:
+        with open(os.path.join(data_dir, "friendsqa_trn.json"), "r", encoding="utf-8") as reader:
             input_data = json.load(reader)
         return self._create_examples(input_data, "train")
 
     def get_dev_examples(self, data_dir):
-        with open(os.path.join(data_dir, "friends_dev.json"), "r", encoding="utf-8") as reader:
+        with open(os.path.join(data_dir, "friendsqa_dev.json"), "r", encoding="utf-8") as reader:
             input_data = json.load(reader)
         return self._create_examples(input_data, "dev")
 
     def get_test_examples(self, data_dir):
-        with open(os.path.join(data_dir, "friends_test.json"), "r", encoding="utf-8") as reader:
+        with open(os.path.join(data_dir, "friendsqa_tst.json"), "r", encoding="utf-8") as reader:
             input_data = json.load(reader)
         return self._create_examples(input_data, "test")
 
@@ -43,13 +43,15 @@ class FriendsQAProcessor(DataProcessor):
         data = input_data["data"]
         for i in tqdm(range(len(data))):
             content_list = []
-            utterances = data[i]["paragraphs"][0]["utterances"]
+            utterances = data[i]["paragraphs"][0]["utterances:"]
             qas = data[i]["paragraphs"][0]["qas"]
             n_length = len(utterances)
             for utterance in utterances:
                 speaker = utterance["speakers"][0].split(" ")
                 if len(speaker) >= 2:
                     speaker = speaker[0] + "_" + speaker[1]
+                else:
+                    speaker = speaker[0]
                 u_text = speaker + " " + utterance["utterance"]
                 content_list.append(u_text)
             for qa in qas:
@@ -83,7 +85,7 @@ class FriendsQAProcessor(DataProcessor):
 
 
 def friendsqa_convert_example_to_features(examples, tokenizer, max_line_length=64,
-                                                  max_line_number=30, max_question_length=128):
+                                                  max_line_number=107, max_question_length=128):
     pad_token_ids = []
     for i in range(max_line_length):
         pad_token_ids.append(tokenizer.pad_token_id)
@@ -97,8 +99,8 @@ def friendsqa_convert_example_to_features(examples, tokenizer, max_line_length=6
         guid = example.guid
         contents = example.contents
         utterance_label = example.utterance_label
-        left_labels = example.left_labels
-        right_labels = example.right_labels
+        left_labels = example.left_label
+        right_labels = example.right_label
         question = example.question
         question_inputs = tokenizer.encode_plus(question, None, add_special_tokens=True,
                                                 max_length=max_question_length, )
@@ -132,6 +134,8 @@ def friendsqa_convert_example_to_features(examples, tokenizer, max_line_length=6
         if len(lines_input_ids) > max_line_number:
             lines_input_ids = lines_input_ids[:max_line_number]
             attention_masks = attention_masks[:max_line_number]
+            right_labels = right_labels[:max_line_number]
+            left_labels = left_labels[:max_line_number]
         features.append(FriendsQAFeatures(guid=guid, lines_input_ids=lines_input_ids,
                                           attention_masks=attention_masks,
                                           question_input_ids=question_input_ids,

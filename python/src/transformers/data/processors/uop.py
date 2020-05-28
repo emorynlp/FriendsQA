@@ -46,7 +46,7 @@ class UOPProcessor(DataProcessor):
         return examples
 
 
-def uop_convert_example_to_features(examples, tokenizer, max_line_length=128, max_line_number=30):
+def uop_convert_example_to_features(examples, tokenizer, max_line_length=128, max_line_number=107):
     processor = UOPProcessor()
     label_list = processor.get_labels()
     label_map = {label: i for i, label in enumerate(label_list)}

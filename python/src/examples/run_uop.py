@@ -362,7 +362,7 @@ def load_and_cache_examples(args, tokenizer, evaluate=False):
             processor.get_dev_examples(args.data_dir) if evaluate else processor.get_train_examples(args.data_dir)
         )
         features = convert_examples_to_features(
-            examples[0],
+            examples,
             tokenizer,
             args.max_line_length,
             args.doc_stride
@@ -376,7 +376,6 @@ def load_and_cache_examples(args, tokenizer, evaluate=False):
     batch_dict = {}
     for f in features:
         n_lines = len(f.lines_input_ids)
-        assert len(f.type_input_ids) == n_lines
         if n_lines not in batch_dict:
 
             batch_dict[n_lines] = [f]
@@ -616,7 +615,9 @@ def main():
         from_tf=bool(".ckpt" in args.model_name_or_path),
         config=config,
         force_download=True,
-        resume_download=True
+        resume_download=True,
+        utterance_config=BertConfig(num_hidden_layers=2),
+        max_utterances=107,
     )
 
     if args.local_rank == 0:

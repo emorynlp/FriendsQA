@@ -51,7 +51,13 @@ def eval_best(data_file, result_file):
             pred_right = result["inner_right"]
             pred_utterance = None
             pred_answer_text = None
-            if 0 <= pred_uid < len(content_list):
+            answers = qa["answers"]
+            answer_texts = []
+            answer_uids = []
+            for answer in answers:
+                answer_texts.append(answer["answer_text"])
+                answer_uids.append(answer["utterance_id"])
+            if 0 <= pred_uid < len(content_list) and pred_uid in answer_uids:
                 pred_utterance = content_list[pred_uid]
             if pred_utterance:
                 pred_u_tokens = pred_utterance.split(" ")
@@ -59,10 +65,7 @@ def eval_best(data_file, result_file):
                     pred_answer_text = " ".join(pred_u_tokens[pred_left:pred_right + 1])
                 else:
                     pred_answer_text = pred_utterance
-            answers = qa["answers"]
-            answer_texts = []
-            for answer in answers:
-                answer_texts.append(answer["answer_text"])
+
             if pred_answer_text:
                 f1 += metric_max_over_ground_truths(f1_score, pred_answer_text, answer_texts)
                 exact_match += metric_max_over_ground_truths(
@@ -105,9 +108,11 @@ def eval_n_best(data_file, result_file):
                 pred_answer_text = None
                 answers = qa["answers"]
                 answer_texts = []
+                answer_uids = []
                 for answer in answers:
                     answer_texts.append(answer["answer_text"])
-                if 0 <= pred_uid < len(content_list):
+                    answer_uids.append(answer["utterance_id"])
+                if 0 <= pred_uid < len(content_list) and pred_uid in answer_uids:
                     pred_utterance = content_list[pred_uid]
                 if pred_utterance:
                     pred_u_tokens = pred_utterance.split(" ")
@@ -120,8 +125,9 @@ def eval_n_best(data_file, result_file):
                     f1s.append(metric_max_over_ground_truths(f1_score, pred_answer_text, answer_texts))
                     exact_matches.append(metric_max_over_ground_truths(
                         exact_match_score, pred_answer_text, answer_texts))
-            f1 += max(f1s)
-            exact_match += max(exact_matches)
+            if len(f1s) > 0:
+                f1 += max(f1s)
+                exact_match += max(exact_matches)
     exact_match = 100.0 * exact_match / total
     f1 = 100.0 * f1 / total
     return {'exact_match': exact_match, 'f1': f1}

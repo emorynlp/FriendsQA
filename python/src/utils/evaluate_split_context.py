@@ -32,13 +32,15 @@ def eval_best(data_file, result_file):
     f1 = exact_match = total = 0
     for i in tqdm(range(len(data))):
         content_list = []
-        utterances = data[i]["paragraphs"][0]["utterances"]
+        utterances = data[i]["paragraphs"][0]["utterances:"]
         qas = data[i]["paragraphs"][0]["qas"]
-        for utterance in utterances:
+        for ui, utterance in enumerate(utterances):
             speaker = utterance["speakers"][0].split(" ")
             if len(speaker) >= 2:
                 speaker = speaker[0] + "_" + speaker[1]
-            u_text = speaker + " " + utterance["utterance"]
+            else:
+                speaker = speaker[0]
+            u_text = "u" + str(ui) + " " + speaker + " " + utterance["utterance"]
             content_list.append(u_text)
         for qa in qas:
             total += 1
@@ -79,13 +81,15 @@ def eval_n_best(data_file, result_file):
     f1 = exact_match = total = 0
     for i in tqdm(range(len(data))):
         content_list = []
-        utterances = data[i]["paragraphs"][0]["utterances"]
+        utterances = data[i]["paragraphs"][0]["utterances:"]
         qas = data[i]["paragraphs"][0]["qas"]
-        for utterance in utterances:
+        for ui, utterance in enumerate(utterances):
             speaker = utterance["speakers"][0].split(" ")
             if len(speaker) >= 2:
                 speaker = speaker[0] + "_" + speaker[1]
-            u_text = speaker + " " + utterance["utterance"]
+            else:
+                speaker = speaker[0]
+            u_text = "u" + str(ui) + " " + speaker + " " + utterance["utterance"]
             content_list.append(u_text)
         for qa in qas:
             total += 1

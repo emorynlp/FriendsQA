@@ -46,13 +46,13 @@ class FriendsQAProcessor(DataProcessor):
             utterances = data[i]["paragraphs"][0]["utterances:"]
             qas = data[i]["paragraphs"][0]["qas"]
             n_length = len(utterances)
-            for utterance in utterances:
+            for ui, utterance in enumerate(utterances):
                 speaker = utterance["speakers"][0].split(" ")
                 if len(speaker) >= 2:
                     speaker = speaker[0] + "_" + speaker[1]
                 else:
                     speaker = speaker[0]
-                u_text = speaker + " " + utterance["utterance"]
+                u_text = "u" + str(ui) + " " + speaker + " " + utterance["utterance"]
                 content_list.append(u_text)
             for qa in qas:
                 q_id = qa["id"]
@@ -65,11 +65,11 @@ class FriendsQAProcessor(DataProcessor):
                         utterance_id = answer["utterance_id"]
                         is_speaker = answer["is_speaker"]
                         if is_speaker:
-                            inner_start = 0
-                            inner_end = 0
+                            inner_start = 1
+                            inner_end = 1
                         else:
-                            inner_start = answer["inner_start"] + 1
-                            inner_end = answer["inner_end"] + 1
+                            inner_start = answer["inner_start"] + 2
+                            inner_end = answer["inner_end"] + 2
                         left_labels = n_length * [-1]
                         right_labels = n_length * [-1]
                         left_labels[utterance_id] = inner_start
